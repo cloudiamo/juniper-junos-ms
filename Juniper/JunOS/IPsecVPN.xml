@@ -1,0 +1,99 @@
+<ObjectDefinition>
+  <information>
+    <icon>none</icon>
+    <description></description>
+    <displayField>object_id</displayField>
+    <order>0</order>
+    <visibility/>
+    <wfConstraintsPath></wfConstraintsPath>
+    <configType>cli</configType>
+    <createTemplateId></createTemplateId>
+    <createTemplateObject></createTemplateObject>
+    <defaultDisplay>false</defaultDisplay>
+    <dynamic>false</dynamic>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <maxInstances>0</maxInstances>
+    <relatedObjects></relatedObjects>
+    <retainIfImportIsEmpty>false</retainIfImportIsEmpty>
+    <name>IPsecVPN</name>
+    <group>Default</group>
+    <importonce>false</importonce>
+    <importrank>2</importrank>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>false</sortascending>
+    <sortauto>false</sortauto>
+    <sortnumerical>false</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+    <directoryNames>
+      <directoryName>IPSec</directoryName>
+    </directoryNames>
+  </information>
+  <variables frozen="0">
+    <variable displayName="Name" name="params.object_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" uniqueItemsInDropDownList="false" onlyDetailView="false" createOnlyView="false" localVarNameMatch="" remoteVarNameMatch="" localVarToFilter="" remoteVarToFilter="" remoteVarValueToFilter="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" arrayMinSizeRequired="false" frozen="false" displayNameHeader="" fullDisplayName="" isCompositeKey="false" shared="false" isMandatory="false" isUserLocked="false" isEditLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="IKEGateway" name="params.IKEGateway" startIncrement="0" type="ObjectRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="1" increment="0" refServiceURI="" keepOnImport="false" editable="false" uniqueItemsInDropDownList="false" onlyDetailView="false" createOnlyView="false" localVarNameMatch="" remoteVarNameMatch="" localVarToFilter="" remoteVarToFilter="" remoteVarValueToFilter="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" arrayMinSizeRequired="false" frozen="false" displayNameHeader="" fullDisplayName="" isCompositeKey="false" shared="false" isMandatory="false" isUserLocked="false" isEditLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <classes>
+        <class>IKEGateways</class>
+      </classes>
+    </variable>
+    <variable displayName="IPsecSettings" name="params.IPsecSettings" startIncrement="0" type="ObjectRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="3" increment="0" refServiceURI="" keepOnImport="false" editable="false" uniqueItemsInDropDownList="false" onlyDetailView="false" createOnlyView="false" localVarNameMatch="" remoteVarNameMatch="" localVarToFilter="" remoteVarToFilter="" remoteVarValueToFilter="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" arrayMinSizeRequired="false" frozen="false" displayNameHeader="" fullDisplayName="" isCompositeKey="false" shared="false" isMandatory="false" isUserLocked="false" isEditLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <classes>
+        <class>IPsecSettings</class>
+      </classes>
+    </variable>
+    <variable displayName="InterfaceTunnel" name="params.InterfaceTunnel" startIncrement="0" type="ObjectRef" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="false" uniqueItemsInDropDownList="false" onlyDetailView="false" createOnlyView="false" localVarNameMatch="" remoteVarNameMatch="" localVarToFilter="" remoteVarToFilter="" remoteVarValueToFilter="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" arrayMinSizeRequired="false" frozen="false" displayNameHeader="" fullDisplayName="" isCompositeKey="false" shared="false" isMandatory="false" isUserLocked="false" isEditLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
+      <classes>
+        <class>InterfaceTunnel</class>
+      </classes>
+    </variable>
+  </variables>
+  <example>
+    <content>set security ipsec proposal vpnIPsecSettings protocol esp
+set security ipsec proposal vpnIPsecSettings authentication-algorithm hmac-sha-256-128
+set security ipsec proposal vpnIPsecSettings encryption-algorithm aes-256-cbc
+set security ipsec proposal vpnIPsecSettings lifetime-seconds 7200
+set security ipsec policy vpnIPsecSettings perfect-forward-secrecy keys group14
+set security ipsec policy vpnIPsecSettings proposals vpnIPsecSettings
+set security ipsec vpn vmrIPsecVPN bind-interface st0.0
+set security ipsec vpn vmrIPsecVPN ike gateway vmr2gateway
+set security ipsec vpn vmrIPsecVPN ike proxy-identity local 172.16.0.2/26
+set security ipsec vpn vmrIPsecVPN ike proxy-identity remote 0.0.0.0/0
+set security ipsec vpn vmrIPsecVPN ike proxy-identity service any
+set security ipsec vpn vmrIPsecVPN ike ipsec-policy vpnIPsecSettings
+set security ipsec vpn vmrIPsecVPN establish-tunnels immediately
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation><![CDATA[show security ipsec | display set]]></operation>
+    <parser>
+      <section>
+        <regexp>@^set security ipsec vpn (?&lt;object_id&gt;\S+) bind-interface st0.(?&lt;InterfaceTunnel&gt;\S+)@</regexp>
+        <regexp>@^set security ipsec vpn (?&lt;object_id&gt;\S+) ike ipsec-policy (?&lt;IPsecSettings&gt;\S+)@</regexp>
+        <regexp>@^set security ipsec vpn (?&lt;object_id&gt;\S+) ike gateway (?&lt;IKEGateway&gt;\S+)@</regexp>
+      </section>
+      <lines>
+        <line>
+          <regexp></regexp>
+          <xpath></xpath>
+        </line>
+      </lines>
+    </parser>
+  </command>
+  <command name="CREATE">
+    <operation><![CDATA[set security ipsec vpn {$params.object_id} bind-interface st0.{$params.InterfaceTunnel}
+set security ipsec vpn {$params.object_id} ike gateway {$params.IKEGateway}
+set security ipsec vpn {$params.object_id} ike proxy-identity local 172.16.0.2/26
+set security ipsec vpn {$params.object_id} ike proxy-identity remote 0.0.0.0/0
+set security ipsec vpn {$params.object_id} ike proxy-identity service any
+set security ipsec vpn {$params.object_id} ike ipsec-policy {$params.IPsecSettings}
+set security ipsec vpn {$params.object_id} establish-tunnels immediately]]></operation>
+  </command>
+  <command name="READ"/>
+  <command name="UPDATE"/>
+  <command name="CONSTRAINT"/>
+  <command name="DELETE">
+    <operation><![CDATA[delete security ipsec vpn {$params.object_id}]]></operation>
+  </command>
+  <command name="LIST"/>
+  <displayName>IPsecVPN</displayName>
+  <order>0</order>
+</ObjectDefinition>
