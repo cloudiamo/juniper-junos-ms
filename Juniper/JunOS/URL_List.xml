@@ -1,7 +1,7 @@
 <ObjectDefinition>
   <information>
     <icon>none</icon>
-    <description>Doc to write url-pattern is avaialbe here : https://www.juniper.net/documentation/us/en/software/junos/cli-reference/topics/ref/statement/security-edit-url-pattern.html</description>
+    <description>Doc to write url-pattern is available here : https://www.juniper.net/documentation/us/en/software/junos/cli-reference/topics/ref/statement/security-edit-url-pattern.html</description>
     <displayField>object_id</displayField>
     <order>0</order>
     <visibility/>
