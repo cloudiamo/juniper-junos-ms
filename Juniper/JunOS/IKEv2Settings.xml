@@ -77,7 +77,7 @@ set security ike proposal {$params.object_id} lifetime-seconds 7200
 
 set security ike policy {$params.object_id} mode main
 set security ike policy {$params.object_id} proposals {$params.object_id}
-set security ike policy {$params.object_id} pre-shared-key ascii-text {$params.peer_preshared}]]></operation>
+set security ike policy {$params.object_id} pre-shared-key ascii-text "{$params.peer_preshared}"]]> </operation>
   </command>
   <command name="READ"/>
   <command name="UPDATE"/>
