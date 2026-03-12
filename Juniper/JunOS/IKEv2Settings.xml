@@ -56,7 +56,7 @@ policy vmrIKE {
       </section>
       <lines>
         <line>
-          <regexp>@^\s+pre-shared-key ascii-text\s+&quot;(?&lt;peer_preshared&gt;[^&quot;]+)@</regexp>
+          <regexp>@^\s+pre-shared-key ascii-text\s+&quot;(?&lt;peer_preshared&gt;[^&quot;]+)&quot;;?@</regexp>
           <xpath></xpath>
         </line>
         <ignore>

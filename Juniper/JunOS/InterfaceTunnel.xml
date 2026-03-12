@@ -44,9 +44,9 @@
     </parser>
   </command>
   <command name="CREATE">
-    <operation><![CDATA[ {if not empty($params.description)}set interfaces st0 description "OPSLAB_{$params.description}"
- {/if}
-set interfaces st0 unit {$params.object_id}]]></operation>
+    <operation><![CDATA[set interfaces st0 unit {$params.object_id}
+{if not empty($params.description)}set interfaces st0 unit {$params.object_id} description "OPSLAB_{$params.description}"
+{/if}]]></operation>
   </command>
   <command name="READ"/>
   <command name="UPDATE"/>
