@@ -36,7 +36,7 @@
                 &lt;utm&gt;
                     &lt;custom-objects&gt;
                         &lt;url-pattern&gt;
-                            &lt;name&gt;Video_Sites&lt;/name&gt;conf
+                            &lt;name&gt;Video_Sites&lt;/name&gt;
                             &lt;value&gt;http://*.youtube.com&lt;/value&gt;
                             &lt;value&gt;http://*.vimeo.com&lt;/value&gt;
                             &lt;value&gt;http://*.netflix.com&lt;/value&gt;
