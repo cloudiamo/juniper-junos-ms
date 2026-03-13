@@ -1,0 +1,98 @@
+<ObjectDefinition>
+  <information>
+    <icon>none</icon>
+    <description>Doc to write url-pattern is available here : https://www.juniper.net/documentation/us/en/software/junos/cli-reference/topics/ref/statement/security-edit-url-pattern.html</description>
+    <displayField>object_id</displayField>
+    <order>0</order>
+    <visibility/>
+    <wfConstraintsPath></wfConstraintsPath>
+    <configType>cli</configType>
+    <createTemplateId></createTemplateId>
+    <createTemplateObject></createTemplateObject>
+    <defaultDisplay>false</defaultDisplay>
+    <dynamic>false</dynamic>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <maxInstances>0</maxInstances>
+    <relatedObjects></relatedObjects>
+    <retainIfImportIsEmpty>false</retainIfImportIsEmpty>
+    <name>URL_List</name>
+    <group>Default</group>
+    <importonce>false</importonce>
+    <importrank>0</importrank>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>false</sortascending>
+    <sortauto>false</sortauto>
+    <sortnumerical>false</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+  </information>
+  <variables frozen="0">
+    <variable displayName="object_id" name="params.object_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" uniqueItemsInDropDownList="false" onlyDetailView="false" createOnlyView="false" localVarNameMatch="" remoteVarNameMatch="" localVarToFilter="" remoteVarToFilter="" remoteVarValueToFilter="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" arrayMinSizeRequired="false" frozen="false" displayNameHeader="" fullDisplayName="" isCompositeKey="false" shared="false" isMandatory="false" isUserLocked="false" isEditLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="Url" name="params.urls.0.url" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="|" groupDisplayName="" maxLength="100" displayOrder="1" increment="0" refServiceURI="" keepOnImport="false" editable="false" uniqueItemsInDropDownList="false" onlyDetailView="false" createOnlyView="false" localVarNameMatch="" remoteVarNameMatch="" localVarToFilter="" remoteVarToFilter="" remoteVarValueToFilter="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" arrayMinSizeRequired="false" frozen="false" displayNameHeader="" fullDisplayName="" isCompositeKey="false" shared="false" isMandatory="false" isUserLocked="false" isEditLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+  </variables>
+  <example>
+    <content>&lt;rpc-reply xmlns:junos=&quot;http://xml.juniper.net/junos/21.3R0/junos&quot;&gt;
+    &lt;configuration junos:changed-seconds=&quot;1770734267&quot; junos:changed-localtime=&quot;2026-02-10 14:37:47 UTC&quot;&gt;
+            &lt;security&gt;
+                &lt;utm&gt;
+                    &lt;custom-objects&gt;
+                        &lt;url-pattern&gt;
+                            &lt;name&gt;Video_Sites&lt;/name&gt;
+                            &lt;value&gt;http://*.youtube.com&lt;/value&gt;
+                            &lt;value&gt;http://*.vimeo.com&lt;/value&gt;
+                            &lt;value&gt;http://*.netflix.com&lt;/value&gt;
+                        &lt;/url-pattern&gt;
+                        &lt;url-pattern&gt;
+                            &lt;name&gt;Ubiqube&lt;/name&gt;
+                            &lt;value&gt;https://*.ubiqube.com&lt;/value&gt;
+                            &lt;value&gt;https://*.sas-opslab.com&lt;/value&gt;
+                        &lt;/url-pattern&gt;
+                    &lt;/custom-objects&gt;
+                &lt;/utm&gt;
+            &lt;/security&gt;
+    &lt;/configuration&gt;
+    &lt;cli&gt;
+        &lt;banner&gt;[edit]&lt;/banner&gt;
+    &lt;/cli&gt;
+&lt;/rpc-reply&gt;
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation><![CDATA[show security utm custom-objects url-pattern |display xml]]></operation>
+    <parser>
+      <section>
+        <regexp>@&lt;name&gt;(?&lt;object_id&gt;\S+)&lt;/name&gt;@</regexp>
+      </section>
+      <lines>
+        <line>
+          <regexp></regexp>
+          <xpath></xpath>
+        </line>
+        <line>
+          <regexp></regexp>
+          <xpath></xpath>
+        </line>
+        <line>
+          <array name="urls">
+            <regexp>@&lt;value&gt;(?&lt;url&gt;[^&lt;]*)&lt;/value&gt;@</regexp>
+          </array>
+          <regexp></regexp>
+          <xpath></xpath>
+        </line>
+      </lines>
+    </parser>
+  </command>
+  <command name="CREATE">
+    <operation><![CDATA[{foreach $params.urls as $url}
+set security utm custom-objects url-pattern {$params.object_id} value {$url.url}
+{/foreach}]]></operation>
+  </command>
+  <command name="READ"/>
+  <command name="UPDATE"/>
+  <command name="CONSTRAINT"/>
+  <command name="DELETE">
+    <operation><![CDATA[delete security utm custom-objects url-pattern {$params.object_id}]]></operation>
+  </command>
+  <command name="LIST"/>
+  <displayName>URL_List</displayName>
+  <order>0</order>
+</ObjectDefinition>
