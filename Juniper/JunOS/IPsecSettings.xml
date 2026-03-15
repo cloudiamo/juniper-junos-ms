@@ -61,10 +61,10 @@ policy vmipsecset {
     <operation><![CDATA[set security ipsec proposal {$params.object_id} protocol esp
 set security ipsec proposal {$params.object_id} authentication-algorithm hmac-sha-256-128
 set security ipsec proposal {$params.object_id} encryption-algorithm aes-256-cbc
-set security ipsec proposal {$params.object_id}  lifetime-seconds 7200
+set security ipsec proposal {$params.object_id} lifetime-seconds 7200
 
-set security ipsec policy {$params.object_id}  perfect-forward-secrecy keys group14
-set security ipsec policy {$params.object_id}  proposals {$params.object_id} ]]></operation>
+set security ipsec policy {$params.object_id} perfect-forward-secrecy keys group14
+set security ipsec policy {$params.object_id} proposals {$params.object_id} ]]></operation>
   </command>
   <command name="READ"/>
   <command name="UPDATE"/>
